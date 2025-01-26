@@ -1,0 +1,29 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    entrypoint: ["/app/wait-for-it.sh", "db:5432", "--", "uvicorn", "src.main:app_api", "--host", "0.0.0.0", "--port", "8080"]
+    environment:
+      - PYTHONPATH=/app/src
+    env_file: 
+      - .env  # Cargar variables de entorno desde el archivo .env
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cv_database 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db_init:/docker-entrypoint-initdb.d  # Montar el directorio de scripts de inicialización
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+volumes:
+  postgres_data:
+
