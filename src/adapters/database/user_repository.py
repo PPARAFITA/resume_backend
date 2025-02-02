@@ -8,7 +8,7 @@ class UserRepository:
         self.db = db
 
     def create_user(self, user: UserCreate):
-        db_user = User(nombre=user.nombre, apellido=user.apellido, email=user.email, celular=user.celular, nacionalidad = user.nacionalidad, ubicacion = user.location )
+        db_user = User(nombre=user.nombre, apellido=user.apellido, email=user.email, celular=user.celular, nacionalidad = user.nacionalidad, ubicacion = user.ubicacion )
         self.db.add(db_user)
         self.db.commit()
         self.db.refresh(db_user)
