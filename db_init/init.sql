@@ -43,3 +43,8 @@ INSERT INTO education (educationid, school_name, degree, start_date, end_date, u
 VALUES 
     (1, 'Universidad Kennedy', 'System Analyst', 'Oct 2014', 'Dec 2018', 1),
     (2, 'Universidad Tecnologica', 'Data Engineer', 'Apr 2015', 'Dec 2020', 2);
+
+-- Asegurar que la secuencia se actualice
+SELECT setval('user_data_userid_seq', (SELECT MAX(userid) FROM user_data));
+SELECT setval('work_experience_workid_seq', (SELECT MAX(workid) FROM work_experience));
+SELECT setval('education_educationid_seq', (SELECT MAX(educationid) FROM education));
