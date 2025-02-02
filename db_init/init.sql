@@ -31,18 +31,21 @@ CREATE TABLE IF NOT EXISTS education (
 INSERT INTO user_data (userid, nombre, apellido, email, celular, nacionalidad, ubicacion) 
 VALUES 
     (1, 'Priscila', 'Parafita', 'priscila.parafita56@gmail.com', 654591486, 'Argentina', 'Barcelona'),
-    (2, 'Daniel', 'Fontana', 'daniel@gmail.com', 654591486, 'Argentina', 'Barcelona');
+    (2, 'Daniel', 'Fontana', 'daniel@gmail.com', 654591486, 'Argentina', 'Barcelona'),
+    (3, 'Tone', 'Bird', 'tonecito@gmail.com', 678687, 'Argentina', 'Buenos Aires');
 
 INSERT INTO work_experience (workid, company_name, position, start_date, end_date, userid) 
 VALUES 
     (1, 'Mercado Libre', 'ABAP Developer', 'Oct 2017', 'Apr 2021', 1),
     (2, 'Volkswagen', 'Python Backend Developer', 'Apr 2021', 'at present', 1),
-    (3, 'Wurth Electronic', 'C# Developer', 'May 2021', 'At present', 2);
+    (3, 'Wurth Electronic', 'C# Developer', 'May 2021', 'At present', 2),
+    (4, 'Casa Rosada', 'Sultan', 'May 2000', 'At present', 3);
 
 INSERT INTO education (educationid, school_name, degree, start_date, end_date, userid) 
 VALUES 
     (1, 'Universidad Kennedy', 'System Analyst', 'Oct 2014', 'Dec 2018', 1),
-    (2, 'Universidad Tecnologica', 'Data Engineer', 'Apr 2015', 'Dec 2020', 2);
+    (2, 'Universidad Tecnologica', 'Data Engineer', 'Apr 2015', 'Dec 2020', 2),
+    (3, 'Universidad Birds', 'El rey de todos', 'Apr 1995', 'Dec 2000', 3);
 
 -- Asegurar que la secuencia se actualice
 SELECT setval('user_data_userid_seq', (SELECT MAX(userid) FROM user_data));
