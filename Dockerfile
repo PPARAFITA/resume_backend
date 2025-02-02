@@ -12,4 +12,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+ENV PYTHONPATH=/app/src
+
 CMD ["uvicorn", "src.main:app_api", "--host", "0.0.0.0", "--port", "8080"]

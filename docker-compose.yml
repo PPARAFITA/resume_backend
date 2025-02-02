@@ -10,6 +10,8 @@ services:
       - PYTHONPATH=/app/src
     env_file: 
       - .env  # Cargar variables de entorno desde el archivo .env
+    volumes:
+      - ./src:/app/src  # Monta el directorio de código local en el contenedor
   db:
     image: postgres:13
     environment:
@@ -19,6 +21,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db_init:/docker-entrypoint-initdb.d  # Montar el directorio de scripts de inicialización
+    ports:
+      - "5432:5432"  # Asegúrate de exponer el puerto
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U user"]
       interval: 30s
