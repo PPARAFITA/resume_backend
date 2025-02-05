@@ -4,9 +4,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
-load_dotenv()  # Cargar variables de entorno desde el archivo .env
+# Cargar las variables del archivo .env solo si estás en desarrollo
+if os.getenv("FLASK_ENV") != "production":
+    load_dotenv()  # Cargar el archivo .env para el entorno local
 
-DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
+DATABASE_URL = os.getenv("DB_HOST")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
