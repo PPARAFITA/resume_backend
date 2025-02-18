@@ -5,10 +5,13 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 
 # Cargar las variables del archivo .env solo si estás en desarrollo
-if os.getenv("FLASK_ENV") != "production":
+if os.getenv("ENV") != "production":
     load_dotenv()  # Cargar el archivo .env para el entorno local
 
 DATABASE_URL = os.getenv("DB_HOST")
+
+if not DATABASE_URL:
+    raise ValueError("La variable de entorno 'DB_HOST' no está configurada correctamente.")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
