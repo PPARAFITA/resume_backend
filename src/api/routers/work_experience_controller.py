@@ -7,12 +7,12 @@ from typing import List
 
 router = APIRouter()
 
-@router.post("/works/", response_model=WorkExperienceSchema)
+@router.post("/works/", response_model=WorkExperienceSchema, tags=["WorkExperience"])
 def create_user(workExperience: WorkExperienceCreate, db: Session = Depends(get_db)):
     service = WorkExperienceService(db)
     return service.create_workExperience(workExperience)
 
-@router.get("/works/{work_id}", response_model=WorkExperienceSchema)
+@router.get("/works/{work_id}", response_model=WorkExperienceSchema, tags=["WorkExperience"])
 def read_work(work_id: int, db: Session = Depends(get_db)):
     service = WorkExperienceService(db)
     db_work = service.get_work_by_id(work_id)
@@ -20,7 +20,7 @@ def read_work(work_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Work not found")
     return db_work
 
-@router.get("/users/{user_id}/works", response_model=List[WorkExperienceSchema])
+@router.get("/users/{user_id}/works", response_model=List[WorkExperienceSchema], tags=["WorkExperience"])
 def read_works( user_id: int, db: Session = Depends(get_db)):
     service = WorkExperienceService(db)
     works_list = service.get_works_by_user(user_id)
