@@ -16,7 +16,7 @@ class User(Base):
 
 # Relación con WorkExperience
     work_experiences = relationship("WorkExperience", back_populates="user")
-    education - relationship("Education", back_populates="user")
+    education = relationship("Education", back_populates="user")
 
 class WorkExperience(Base):
     __tablename__ = "work_experience"
