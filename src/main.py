@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from api.routers import user, work_experience_controller, education_controller
 from database import init_db
-from contextlib import asynccontextmanager
+from contextlib import contextmanager
 
 @contextmanager
 def lifespan(app: FastAPI):
