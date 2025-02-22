@@ -3,8 +3,8 @@ from api.routers import user, work_experience_controller, education_controller
 from database import init_db
 from contextlib import asynccontextmanager
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
+@contextmanager
+def lifespan(app: FastAPI):
     # Código para el evento de inicio
     print("Application startup")
     init_db()  # Crear las tablas cuando la aplicación arranca
