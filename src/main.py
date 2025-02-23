@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from api.routers import user, work_experience_controller, education_controller
 from database import init_db
 from contextlib import asynccontextmanager  
+from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -13,6 +14,15 @@ async def lifespan(app: FastAPI):
     print("Application shutdown")
 
 app_api = FastAPI(lifespan=lifespan)
+
+# 🔹 Agregar CORS Middleware
+app_api.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Permitir solo tu frontend en local
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos los métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permitir todos los headers
+)
 
 app_api.include_router(user.router)
 app_api.include_router(work_experience_controller.router) 
