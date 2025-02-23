@@ -14,6 +14,8 @@ class User(Base):
     celular = Column(Integer)
     nacionalidad = Column(String)
     ubicacion = Column(String)
+    github = Column(String, nullable=True)  
+    linkedin = Column(String, nullable=True) 
 
     # Relación con otras tablas
     work_experiences = relationship("WorkExperience", back_populates="user")
