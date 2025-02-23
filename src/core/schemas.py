@@ -1,22 +1,19 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class UserCreate(BaseModel):
+class UserBase(BaseModel):
     nombre: str
     apellido: str
     email : str
     celular : int
     nacionalidad : str
     ubicacion : str
+    github : Optional[str] = None
+    linkedin : Optional[str] = None
 
-class User(BaseModel):
+class User(UserBase):
     userid: int
-    nombre: str
-    apellido: str
-    email : str
-    celular : int
-    nacionalidad : str
-    ubicacion : str
+
 
 class EducationBase(BaseModel):
     school_name: str

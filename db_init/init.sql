@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS user_data (
     email VARCHAR(100),
     celular VARCHAR(20),
     nacionalidad VARCHAR(50),
-    ubicacion VARCHAR(200)
+    ubicacion VARCHAR(200),
+    github VARCHAR(200),
+    linkedin VARCHAR(200)
 );
 
 CREATE TABLE IF NOT EXISTS work_experience (
