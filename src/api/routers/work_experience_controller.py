@@ -10,7 +10,7 @@ router = APIRouter()
 @router.post("/works/", response_model=WorkExperienceSchema, tags=["WorkExperience"])
 def create_experience(workExperience: WorkExperienceCreate, db: Session = Depends(get_db)):
     service = WorkExperienceService(db)
-    return service.create_workExperience(workExperience)
+    return service.create_work(workExperience)
 
 @router.get("/works/{work_id}", response_model=WorkExperienceSchema, tags=["WorkExperience"])
 def read_work(work_id: int, db: Session = Depends(get_db)):
