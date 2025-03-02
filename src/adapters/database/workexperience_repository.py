@@ -7,15 +7,15 @@ class WorkExperienceRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def create_workExperience(self, experience: WorkExperienceCreate) -> WorkExperience:
+    def create_workExperience(self, experience: WorkExperienceCreate) -> WorkExperienceSchema:
         db_work_experience = WorkExperience(company_name=experience.company_name, position=experience.position, start_date=experience.start_date, end_date=experience.end_date, userid = experience.userid )
         self.db.add(db_work_experience)
         self.db.commit()
         self.db.refresh(db_work_experience)
         return db_work_experience
 
-    def get_work_by_id(self, workexperience_id: int) -> WorkExperience:
+    def get_work_by_id(self, workexperience_id: int) -> WorkExperienceSchema:
         return self.db.query(WorkExperience).filter(WorkExperience.workid == workexperience_id).first()
 
-    def get_all_works_by_user(self, userid: int) -> List[WorkExperience]:
+    def get_all_works_by_user(self, userid: int) -> List[WorkExperienceSchema]:
         return self.db.query(WorkExperience).filter(WorkExperience.userid == userid)
