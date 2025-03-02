@@ -8,7 +8,7 @@ from typing import List
 router = APIRouter()
 
 @router.post("/works/", response_model=WorkExperienceSchema, tags=["WorkExperience"])
-def create_user(workExperience: WorkExperienceCreate, db: Session = Depends(get_db)):
+def create_experience(workExperience: WorkExperienceCreate, db: Session = Depends(get_db)):
     service = WorkExperienceService(db)
     return service.create_workExperience(workExperience)
 
