@@ -8,7 +8,7 @@ class WorkExperienceService:
         self.work_repo = WorkExperienceRepository(db)
 
     def create_work(self, workExperience: WorkExperienceCreate) -> WorkExperienceSchema:
-        return self.work_repo.create_work(workExperience)
+        return self.work_repo.create_workExperience(workExperience)
 
     def get_work_by_id(self, work_id: int) -> WorkExperienceSchema:
         return self.work_repo.get_work_by_id(work_id)
