@@ -27,3 +27,11 @@ def read_works( user_id: int, db: Session = Depends(get_db)):
     if works_list is None:
         raise HTTPException(status_code=404, detail="Works not found")
     return works_list
+
+@router.patch("/works/{work_id}", response_model=WorkExperienceSchema, tags=["WorkExperience"])
+def update_work(work_id: int, workExperience: WorkExperienceSchema, db: Session = Depends(get_db)):
+    service = WorkExperienceService(db)
+    work_upd = service.update_work(work_id)
+    if work_upd is None:
+        raise HTTPException(status_code=404, detail="Work not found")
+    return work_upd  
