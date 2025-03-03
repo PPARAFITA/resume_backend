@@ -10,6 +10,9 @@ class WorkExperienceService:
     def create_work(self, workExperience: WorkExperienceCreate) -> WorkExperienceSchema:
         return self.work_repo.create_workExperience(workExperience)
 
+    def update_work(self, work_id: int, workExperience: WorkExperienceSchema) -> WorkExperienceSchema:
+        return self.work_repo.update_workExperience(work_id, workExperience)
+
     def get_work_by_id(self, work_id: int) -> WorkExperienceSchema:
         return self.work_repo.get_work_by_id(work_id)
 
