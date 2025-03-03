@@ -8,7 +8,7 @@ class WorkExperienceRepository:
         self.db = db
 
     def create_workExperience(self, experience: WorkExperienceCreate) -> WorkExperienceSchema:
-        db_work_experience = WorkExperience(company_name=experience.company_name, position=experience.position, start_date=experience.start_date, end_date=experience.end_date, userid = experience.userid )
+        db_work_experience = WorkExperience(company_name=experience.company_name, position=experience.position, start_date=experience.start_date, end_date=experience.end_date, userid = experience.userid, description = experience.description  )
         self.db.add(db_work_experience)
         self.db.commit()
         self.db.refresh(db_work_experience)
@@ -24,6 +24,7 @@ class WorkExperienceRepository:
         db_work_experience.position = experience.position, 
         db_work_experience.start_date = experience.start_date, 
         db_work_experience.end_date = experience.end_date, 
+        db_work_experience.description = experience.description, 
         db_work_experience.userid = experience.userid
 
         self.db.commit()
