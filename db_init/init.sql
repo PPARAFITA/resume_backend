@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS work_experience (
     workid SERIAL PRIMARY KEY,
     company_name VARCHAR(100),
     position VARCHAR(100),
-    start_date VARCHAR(10),
-    end_date VARCHAR(10),
+    start_date DATE,
+    end_date DATE,
     userid INTEGER REFERENCES user_data(userid)
 );
 
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS education (
     educationid SERIAL PRIMARY KEY,
     school_name VARCHAR(100),
     degree VARCHAR(100),
-    start_date VARCHAR(10),
-    end_date VARCHAR(10),
+    start_date DATE,
+    end_date DATE,
     userid INTEGER REFERENCES user_data(userid)
 );
 
@@ -37,17 +37,19 @@ VALUES
     (3, 'Tone', 'Bird', 'tonecito@gmail.com', 678687, 'Argentina', 'Buenos Aires');
 
 INSERT INTO work_experience (workid, company_name, position, start_date, end_date, userid) 
-VALUES 
-    (1, 'Mercado Libre', 'ABAP Developer', 'Oct 2017', 'Apr 2021', 1),
-    (2, 'Volkswagen', 'Python Backend Developer', 'Apr 2021', 'at present', 1),
-    (3, 'Wurth Electronic', 'C# Developer', 'May 2021', 'At present', 2),
-    (4, 'Casa Rosada', 'Sultan', 'May 2000', 'At present', 3);
+VALUES
+    (1, 'Mercado Libre', 'ABAP Developer', '2017-10-28', '2021-04-11', 1),
+    (2, 'Volkswagen', 'Python Backend Developer', '2021-04-11', NULL, 1),
+    (3, 'Wurth Electronic', 'C# Developer', '2021-01-21', NULL, 2),
+    (4, 'Casa Rosada', 'Sultan', '2000-05-01', NULL, 3);
+
 
 INSERT INTO education (educationid, school_name, degree, start_date, end_date, userid) 
 VALUES 
-    (1, 'Universidad Kennedy', 'System Analyst', 'Oct 2014', 'Dec 2018', 1),
-    (2, 'Universidad Tecnologica', 'Data Engineer', 'Apr 2015', 'Dec 2020', 2),
-    (3, 'Universidad Birds', 'El rey de todos', 'Apr 1995', 'Dec 2000', 3);
+    (1, 'Universidad Kennedy', 'System Analyst', '2014-10-04', '2018-12-31', 1),
+    (2, 'Universidad Tecnologica', 'Data Engineer', '2015-04-01', '2020-12-31', 2),
+    (3, 'Universidad Birds', 'El rey de todos', '1995-04-10', '2000-12-31', 3);
+
 
 -- Asegurar que la secuencia se actualice
 SELECT setval('user_data_userid_seq', (SELECT MAX(userid) FROM user_data));

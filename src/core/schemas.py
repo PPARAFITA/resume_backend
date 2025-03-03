@@ -1,5 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from typing import Optional
+from datetime import date
+from src.infrastructure.utils import parse_date 
 
 class UserBase(BaseModel):
     nombre: str
@@ -31,15 +33,34 @@ class EducationSchema(EducationBase):
 class WorkExperienceBase(BaseModel):
     company_name: str
     position: str
-    start_date: str
-    end_date: Optional[str] = None
+    start_date: date 
+    end_date: Optional[date] = None 
+    description: str
     userid: int
+    
+
+    # Validación para las fechas de inicio y fin
+    @validator('start_date', 'end_date', pre=True)
+    def validate_dates(cls, value):
+        if value:
+            # Si la fecha es una cadena, la parseamos
+            if isinstance(value, str):
+                return parse_date(value)
+            return value  # Si ya es un objeto `datetime.date`, lo dejamos tal cual
+        return value
 
 class WorkExperienceCreate(WorkExperienceBase):
     pass
 
 class WorkExperienceSchema(WorkExperienceBase):
     workid: int
+    @property
+    def start_date_str(self):
+        return self.start_date.strftime("%Y-%m-%d") if self.start_date else None
+
+    @property
+    def end_date_str(self):
+        return self.end_date.strftime("%Y-%m-%d") if self.end_date else None
 
     class Config:
         from_attributes = True
