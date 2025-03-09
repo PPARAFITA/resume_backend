@@ -1,9 +1,9 @@
 -- Crear la tabla si no existe
 CREATE TABLE IF NOT EXISTS user_data (
     userid SERIAL PRIMARY KEY,
-    nombre VARCHAR(100),
-    apellido VARCHAR(100),
-    email VARCHAR(100),
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     celular VARCHAR(20),
     nacionalidad VARCHAR(50),
     ubicacion VARCHAR(200),
@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS work_experience (
     workid SERIAL PRIMARY KEY,
     company_name VARCHAR(100),
     position VARCHAR(100),
+    description VARCHAR(255),
     start_date DATE,
     end_date DATE,
     userid INTEGER REFERENCES user_data(userid)
@@ -36,12 +37,12 @@ VALUES
     (2, 'Daniel', 'Fontana', 'daniel@gmail.com', 654591486, 'Argentina', 'Barcelona'),
     (3, 'Tone', 'Bird', 'tonecito@gmail.com', 678687, 'Argentina', 'Buenos Aires');
 
-INSERT INTO work_experience (workid, company_name, position, start_date, end_date, userid) 
+INSERT INTO work_experience (workid, company_name, position, description, start_date, end_date, userid) 
 VALUES
-    (1, 'Mercado Libre', 'ABAP Developer', '2017-10-28', '2021-04-11', 1),
-    (2, 'Volkswagen', 'Python Backend Developer', '2021-04-11', NULL, 1),
-    (3, 'Wurth Electronic', 'C# Developer', '2021-01-21', NULL, 2),
-    (4, 'Casa Rosada', 'Sultan', '2000-05-01', NULL, 3);
+    (1, 'Mercado Libre', 'ABAP Developer', 'Prueba de description', '2017-10-28', '2021-04-11', 1),
+    (2, 'Volkswagen', 'Python Backend Developer', 'Prueba de description Prueba de description Prueba de description', '2021-04-11', NULL, 1),
+    (3, 'Wurth Electronic', 'C# Developer', 'Prueba de description Prueba de description Prueba de description Prueba de description Prueba de description Prueba de description Prueba de description', '2021-01-21', NULL, 2),
+    (4, 'Casa Rosada', 'Sultan', 'Prueba de description','2000-05-01', NULL, 3);
 
 
 INSERT INTO education (educationid, school_name, degree, start_date, end_date, userid) 

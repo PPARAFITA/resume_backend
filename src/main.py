@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from api.routers import user, work_experience_controller, education_controller
-from database import init_db
+from src.adapters.routers import user, work_experience_controller, education_controller, resume_controller
+from src.adapters.database.database import init_db
 from contextlib import asynccontextmanager  
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -27,3 +27,4 @@ app_api.add_middleware(
 app_api.include_router(user.router)
 app_api.include_router(work_experience_controller.router) 
 app_api.include_router(education_controller.router) 
+app_api.include_router(resume_controller.router) 

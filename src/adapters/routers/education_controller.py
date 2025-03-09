@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from src.core.schemas import EducationCreate, EducationSchema
 from src.core.services.education_service import EducationService
-from database import get_db
+from adapters.database.database import get_db
 from typing import List
 
 router = APIRouter()

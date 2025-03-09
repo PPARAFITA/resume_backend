@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from src.core.schemas import WorkExperienceSchema, WorkExperienceCreate
 from src.core.services.work_experience_service import WorkExperienceService
-from database import get_db
+from src.adapters.database.database import get_db
 from typing import List
 
 router = APIRouter()
@@ -31,7 +31,7 @@ def read_works( user_id: int, db: Session = Depends(get_db)):
 @router.patch("/works/{work_id}", response_model=WorkExperienceSchema, tags=["WorkExperience"])
 def update_work(work_id: int, workExperience: WorkExperienceSchema, db: Session = Depends(get_db)):
     service = WorkExperienceService(db)
-    work_upd = service.update_work(work_id)
+    work_upd = service.update_work(work_id, workExperience )
     if work_upd is None:
         raise HTTPException(status_code=404, detail="Work not found")
     return work_upd  

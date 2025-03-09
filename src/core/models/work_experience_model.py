@@ -10,6 +10,7 @@ class WorkExperience(Base):
     workid = Column(Integer, primary_key=True, index=True)
     company_name = Column(String, index=True)
     position = Column(String)
+    description = Column(String)
     start_date = Column(String)
     end_date = Column(String)
     userid = Column(Integer, ForeignKey('user_data.userid'))
