@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from core.models import User
-from core.schemas import UserBase
+from core.schemas import UserBase, User as UserSchema
 from typing import List
 
 class UserRepository:
@@ -15,17 +15,18 @@ class UserRepository:
         return db_user
 
     def get_user_by_id(self, user_id: int):
-        return self.db.query(User).filter(User.userid == user_id).first()
+        db_user = self.db.query(User).filter(User.userid == user_id).first()
+        return db_user
 
-    def get_all_users(self) -> List[User]:
-        return self.db.query(User)
+    def get_all_users(self) -> List[UserSchema]:
+        users = self.db.query(User).all()  
+        return users
 
-    def update_user(self, user_id: int, user: UserBase) -> User:
+    def update_user(self, user_id: int, user: UserBase):
         db_user = self.get_user_by_id(user_id)
         if not db_user:
-            return None  # O podrías lanzar una excepción HTTP 404
+            raise HTTPException(status_code=404, detail="User not found")
 
-        # Actualizar los campos con los nuevos valores
         db_user.nombre = user.nombre
         db_user.apellido = user.apellido
         db_user.email = user.email
@@ -37,4 +38,4 @@ class UserRepository:
 
         self.db.commit()
         self.db.refresh(db_user)
-        return db_user  
+        return db_user

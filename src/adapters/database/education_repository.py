@@ -15,7 +15,14 @@ class EducationRepository:
         return db_education
 
     def get_education_by_id(self, education_id: int) -> EducationSchema:
-        return self.db.query(Education).filter(Education.education_id == education_id).first()
+        db_education = self.db.query(Education).filter(Education.education_id == education_id).first()
+        if not db_education:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        return db_education
 
     def get_all_educations_by_user(self, user_id: int) -> List[EducationSchema]:
-        return self.db.query(Education).filter(Education.userid == user_id)
+        db_education_list = self.db.query(Education).filter(Education.userid == user_id)
+        if not db_education_list:
+            raise HTTPException(status_code=404, detail="Educations not found")
+        return db_education_list 
