@@ -8,7 +8,7 @@ class UserRepository:
         self.db = db
 
     def create_user(self, user: UserBase):
-        db_user = User(nombre=user.nombre, apellido=user.apellido, email=user.email, celular=user.celular, nacionalidad = user.nacionalidad, ubicacion = user.ubicacion, github = user.github, linkedin = user.linkedin )
+        db_user = User(nombre=user.nombre, apellido=user.apellido, email=user.email, celular=user.celular, nacionalidad = user.nacionalidad, ubicacion = user.ubicacion, github = user.github, linkedin = user.linkedin, about_me = user.about_me )
         self.db.add(db_user)
         self.db.commit()
         self.db.refresh(db_user)
@@ -35,6 +35,7 @@ class UserRepository:
         db_user.ubicacion = user.ubicacion
         db_user.github = user.github
         db_user.linkedin = user.linkedin
+        db_user.about_me = user.about_me
 
         self.db.commit()
         self.db.refresh(db_user)

@@ -5,6 +5,10 @@ from src.utils.utils import parse_date
 from typing import List
 
 
+class AboutMeItem(BaseModel):
+    type: str
+    content: str
+
 class UserBase(BaseModel):
     nombre: str
     apellido: str
@@ -12,6 +16,7 @@ class UserBase(BaseModel):
     celular : int
     nacionalidad : str
     ubicacion : str
+    about_me : List[AboutMeItem]
     github : Optional[str] = None
     linkedin : Optional[str] = None
 
@@ -21,6 +26,17 @@ class UserBase(BaseModel):
 class User(UserBase):
     userid: int
 
+class SkillItem(BaseModel):
+    skill_title: str
+    skill_tags: List[str]
+
+class SkillBase(BaseModel):
+    skillid: int
+    user_skill: List[SkillItem]
+    userid: int
+
+    class Config:
+        from_attributes = True
 
 class EducationBase(BaseModel):
     school_name: str

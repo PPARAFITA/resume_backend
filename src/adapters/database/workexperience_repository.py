@@ -34,8 +34,12 @@ class WorkExperienceRepository:
 
     def get_work_by_id(self, workexperience_id: int):
         db_work_experience = self.db.query(WorkExperience).filter(WorkExperience.workid == workexperience_id).first()
+        if not db_work_experience:
+            raise HTTPException(status_code=404, detail="work experience not found")
         return db_work_experience 
 
     def get_all_works_by_user(self, userid: int):
         db_work_list = self.db.query(WorkExperience).filter(WorkExperience.userid == userid).order_by(WorkExperience.start_date.desc()).all()
+        if not db_work_list:
+            raise HTTPException(status_code=404, detail="work experience list not found")
         return db_work_list

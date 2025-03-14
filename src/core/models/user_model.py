@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy_utils import JSONType
 
 Base = declarative_base()
 
@@ -14,9 +15,11 @@ class User(Base):
     celular = Column(Integer)
     nacionalidad = Column(String)
     ubicacion = Column(String)
+    about_me = Column(JSONType)
     github = Column(String, nullable=True)  
     linkedin = Column(String, nullable=True) 
 
     # Relación con otras tablas
     work_experiences = relationship("WorkExperience", back_populates="user")
     education = relationship("Education", back_populates="user")
+    skills = relationship("Skill", back_populates="user")
