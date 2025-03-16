@@ -4,7 +4,7 @@ from core.models.work_experience_model import WorkExperience
 from core.schemas import WorkExperienceSchema, WorkExperienceCreate
 from core.interfaces.work_experience_service_interf import WorkExperienceServiceInterf
 from typing import List
-from FastApi import HTTPException
+from fastapi import HTTPException
 
 class WorkExperienceService(WorkExperienceServiceInterf):
     def __init__(self, db: Session):
