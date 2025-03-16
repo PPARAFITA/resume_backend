@@ -9,3 +9,4 @@ pytest-asyncio
 anyio
 httpx
 sqlalchemy-utils
+flake8
